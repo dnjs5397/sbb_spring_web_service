@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,7 +10,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
     <!-- sbb CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-    <title>Hello, sbb!</title>
+
+    <title>묻고 답해요</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Noto Sans KR', sans-serif;
+            }
+        </style>
 </head>
 <body>
 
@@ -23,4 +33,5 @@
 <script th:src="@{/bootstrap.min.js}"></script>
 <th:block layout:fragment="script"></th:block>
 </body>
+
 </html>

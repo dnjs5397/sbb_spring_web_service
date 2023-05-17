@@ -9,6 +9,7 @@ import com.myweb.sbb.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,12 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserService userService;
-
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
-        Page<Question> paging = this.questionService.getList(page);
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
         model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
         return "question_list";
     }
 
