@@ -2,14 +2,11 @@ package com.myweb.sbb.Question;
 
 
 import com.myweb.sbb.Answer.AnswerForm;
-import com.myweb.sbb.Question.Question;
-import com.myweb.sbb.Question.QuestionRepository;
 import com.myweb.sbb.User.SiteUser;
 import com.myweb.sbb.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.List;
 
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
 public class QuestionController {
 
+    private final QuestionRepository questionRepository;
     private final QuestionService questionService;
     private final UserService userService;
     @GetMapping("/list")
@@ -40,6 +37,7 @@ public class QuestionController {
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
         Question question = this.questionService.getQuestion(id);
+        this.questionService.updateView(id);
         model.addAttribute("question", question);
         return "question_detail";
     }
